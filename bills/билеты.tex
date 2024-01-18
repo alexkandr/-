@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[english, russian]{babel}
+\usepackage[T2A]{fontenc}
+\usepackage{amsfonts}
+
+\title{Восстановление математика}
+\author{Акантьев }
+\date{2023}
+
+\begin{document}
+
+\maketitle
+\newpage
+\section{Введение в математический анализ}
+\Large{1}
+\emph{Предел числовой последовательности.}
+
+
+def. (Эпсилон окрестность)
+\[\textbf{} U_\varepsilon (\pm\infty) = (\pm \infty, \pm \frac{1}{\varepsilon})\]
+def. 
+\[\textbf{} U_\varepsilon (\pm\infty) = (\pm \infty, \pm \frac{1}{\varepsilon})\]
+def. (Предел числовой последовтельности)
+\[ \textbf{} a \in \bar{\mathbb{R}} = \lim_{n \rightarrow +\infty}{a_n} \Leftrightarrow \forall \varepsilon > 0 \, \exists N \in \mathbb{N} \, \forall n > N : a_n \in U_\varepsilon(a) \]
+
+\newpage
+\section{Кратные интегралы и теория поля}
+\emph{\Large{1. Теорема о неявной функции, заданной одним уравнением. }}
+
+\textbf{Th.  (Теорема о неявной функции, заданной одним уравнением.) }
+
+Пусть:
+\begin{enumerate}
+	\item  $x_0 \in \mathbb{R}^n ,y_0 \in \mathbb{R} $
+	\item  $F(x,y):\mathbb{R}^{n+1}\rightarrow \mathbb{R} \hookrightarrow F(x_0, y_0) = 0$
+	\item  $F \in C(U_\varepsilon(x_0, y_0))$
+	\item $\forall (x,y) \in U_\varepsilon(x_0,y_0) \, \exists F_y'(x, y)  \land \, F_y'(x, y) \textnormal{ непрерывна в т.  } (x_0, y_0) $
+	\item $F_y'(x, y) \neq 0 $
+ \end{enumerate}
+ Тогда   
+ \[ \exists \gamma > 0 \, \exists \delta > 0   \, \exists \varphi: U_\gamma(x_0) \rightarrow U_\delta (y_0) \textnormal{- нерперывная в т. }  x_0 \textnormal{, т. ч.:} \]
+ \[ \forall x^* \in U_\gamma(x_0) \hookrightarrow F(x^*, y) = 0 \Leftrightarrow y = \varphi(x^*)  \]
+ \textbf{Доказательство}
+ 
+ НУО $F_y'(x_0,y_0) > 0. \textnormal{ Тогда } \exists \varepsilon_1 \in (0,\varepsilon) $ такое что
+ \begin{equation}\label{positive_in_U}
+ F_y'(x,y) > 0 \; \forall (x,y) \in U_{\varepsilon_1}(x_0,y_0)
+ \end{equation}
+ Зафиксируем $\delta \in (0,\frac{\varepsilon_1}{\sqrt{2}}).$ 
+ \[\Rightarrow \forall x \in U_\delta(x_0) \, \forall y \in U_\delta(y_0)  \hookrightarrow
+ \|(x,y) - (x_0,y_0)\|_2 < \sqrt{\delta^2 + \delta^2} < \varepsilon_1,\]
+ \begin{equation}\label{monot1}
+ \Rightarrow \textnormal{(согласно \ref{positive_in_U} )} \forall x \in U_\delta(x_0) \, F(x,y) \nearrow \textnormal{по y на } [y_0-\delta, y_0+\delta]
+ \end{equation}
+ \[\Rightarrow F(x_0, y_0-\delta)<0 \land F(x_0, y_0+\delta)>0\]
+  \[\Rightarrow \exists \gamma \in (0, \delta] : \forall x \in U_\gamma(x_0) \hookrightarrow F(x, y_0-\delta)<0 \land F(x, y_0+\delta)>0\]
+  Пусть $f(y) := F(x,y)$ - непрерывна на $[y_0-\delta, y_0+\delta]$. Тогда по теореме о промежуточном значении: $\forall x \in U_\gamma(x_0) \, \exists \varphi(x) \in (y_0 - \delta, y_0 + \delta) $ такое что: $F(x, \varphi(x)) = 0$, То есть $\exists \varphi: U_\gamma(x_0) \rightarrow  U_\delta(y_0)$. 	
+  Cогласно \textbf{\ref{monot1}} $\forall x \in U_\gamma(x_0) \exists! y = \varphi(x) \in U_\delta(y_0) \hookrightarrow F(x, y) = 0$
+  
+  Так как $\delta $ выбиралась произвольно, то по тем же рассуждениям $\Rightarrow$
+  \[ \forall \delta_1 \in (0, \delta] \exists \gamma_1 \in (0, \gamma] : \forall x \in U_{\delta_1}(x_0) \hookrightarrow \varphi(x) \in U_{\gamma_1}(y_0) \]
+Таким образом доказана непрерывность $\varphi$ в точке $x_0$
+
+\emph{\Large{2. Экстремумы функций многих переменных: необходимое условие, достаточное условие. Условный экстремум функции многих переменных при наличии связей: исследование при помощи функции Лагранжа. Необходимые условия. Достаточные условия. }}
+
+\textbf{Определение.} Пусть на $X \subset \mathbb{R}^n$ задана $f: X \rightarrow \mathbb{R}$. Точка $x_0$ называется \emph{точкой строго (слабого) локального минимума} (максимума) функции $f$ на множестве $X$, если: 
+\[\exists \delta >0 : \forall x \in \mathring{U}_\delta(x_0) \cap X \hookrightarrow f(x_0) < (\leq, > , \geq) f(x)\]
+\textbf{Определение.} Пусть $x_0$ - точка локального экстремума $f$ на $X$.  $x_0$ называется \emph{точкой безусловно локального экстремума}, если $x_0 \in \textnormal{int}{X}$, то $x_0$. Если $x_0 \in \partial X $, то это \emph{точка условного локального экстремума}
+\textbf{Th.  (Необходимое условие экстремума) }
+Пусть 
+\begin{enumerate}
+	\item $f \colon U_\varepsilon(x_0) \subset \mathbb{R}^n \to \mathbb{R}$
+	\item $f(x)$ дифф в точке $x_0$
+	\item $x_0$ - точка безусловного локального экстремума $f(x)$
+\end{enumerate}
+тогда $\textnormal{grad} f(x_0) = \bar{0}$
+
+ \textbf{Доказательство}
+ 
+ Зафиксируем $i \in \{1, \dots, n \}$.
+ \[\varphi(x^i) := f(x_0^1, \dots, x_0^{i-1}, x^i, x_0^{i+1}, \dots x_0^n)\]
+$x_0$ - точка лок. экстремума $f(x) \Rightarrow x_0^i$ - точка лок. экстремума $\varphi(x^i) \Rightarrow$ (по теореме Ферма) $\varphi'(x^i_0) = 0 \Rightarrow$
+\[\forall i \in \{1, \dots, n \} \frac{\partial f} {\partial x^i}( x_0) =\varphi'(x_0^i) = 0 \Rightarrow \textnormal{grad} f(x_0) = 0\]
+
+\textbf{Определение.} Если $\textnormal{grad} f(x_0) = 0$, то $x_0$ называется \emph{стационарной точкой}.
+
+\end{document}

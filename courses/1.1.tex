@@ -1,0 +1,287 @@
+\section{Введение в математический анализ}
+
+\subsection{Предел числовой последовательности. Единственность предела \dots} %Бесконечно малые последовательности и их свойства. Свойства пределов, связанные с неравенствами. Арифметические операции со сходящимися последовательностями. Теорема Вейерштрасса о пределе монотонной ограниченной последовательности. Число e. Теорема Кантора о вложенных отрезках. Бесконечно большие последовательности и их свойства.}
+
+\subsubsection{Предел числовой последовательности}
+\begin{definition} (Эпсилон окрестность)
+    \[\forall a \, \forall \eps > 0 \: U_\eps(a) = \{x : \rho (x, a) < \eps \}\]
+    \[\textbf{} U_\eps (\pm\infty) = (\pm \infty, \pm \frac{1}{\eps})\]
+\end{definition}
+\begin{definition}(Предел числовой последовательности)
+    \[a \in \bar{\R} = \lim_{n \rightarrow +\infty}{a_n} \Leftrightarrow \forall \eps > 0 \, \exists N \in \N \, \forall n > N : a_n \in U_\eps(a)\]
+    Если $$a\in\R$$, то последовательность называется сходящейся
+\end{definition}
+
+
+\subsubsection{Единственность предела}
+\begin{theorem}(Единственность предела)
+    Числовая последовательность может иметь не более чем один предел.
+\end{theorem}
+\begin{proof}
+    Предположим, что $\exists l_1, l_2 \in \R\ |\ \liml_{n \to \infty} x_n = l_1, \liml_{n \to \infty} x_n = l_2$. Тогда:
+    $$
+        \System{
+        \liml_{n \to \infty} x_n = l_1 \lra \forall \eps > 0\ \exists N_1 \in \N\ |\ \forall n > N_1\ |x_n - l_1| < \eps \lra l_1 - \eps < x_n < l_1 + \eps
+        \\
+        \liml_{n \to \infty} x_n = l_2 \lra \forall \eps > 0\ \exists N_2 \in \N\ |\ \forall n > N_2\ |x_n - l_2| < \eps \lra l_2 - \eps < x_n < l_2 + \eps
+        }
+    $$
+    Рассмотрим $\eps = \frac{l_2 - l_1}{2} > 0$, $\forall n > max(N_1, N_2)$:
+    $$
+        \System{
+        l_1 + \eps = l_1 + \frac{l_2 - l_1}{2} = \frac{l_1 + l_2}{2}
+        \\
+        l_2 - \eps = l_2 - \frac{l_2 - l_1}{2} = \frac{l_1 + l_2}{2}
+        }
+    $$
+\end{proof}
+
+\begin{theorem} (Предел произведения б.м. и ограниченной последовательностей)
+	Если $\{x_n\}_{n = 1}^\infty$ - бесконечно малая, а $\{y_n\}_{n = 1}^\infty$ ограничена, то $\{x_ny_n\}_{n = 1}^\infty$ - бесконечно малая последовательность.
+\end{theorem}
+\begin{proof}
+	$\{y_n\}_{n = 1}^\infty$ - ограниченная $\Ra \exists M > 0\ |\ \forall n \in \N\ |y_n| \le M$
+	
+	$\{x_n\}_{n = 1}^\infty$ - бесконечно малая $\Ra \forall \eps > 0\ \exists N \in \N\ |\ \forall n > N\ |x_n| < \frac{\eps}{M}$
+\end{proof}
+
+
+\subsubsection{Свойства предела, связанные с неравенствами}
+\begin{theorem}(Свойства предела) 
+
+	\begin{enumerate}
+		\item (Ограниченность сходящейся последовательности) Если последовательность сходится, то она ограничена.
+		
+		\item (Отделенность от нуля и сохранение знака) Если последовательность $\{x_n\}_{n = 1}^\infty$ сходится к $l \neq 0$, то $\exists N \in \N \such \forall n > N\ \sgn x_n = \sgn l$ и $|x_n| > \frac{|l|}{2}$
+		
+		\item (Переход к пределу в неравенстве) Если $\liml_{n \to \infty} x = x_0$, $\liml_{n \to \infty} y = y_0$ и $\exists N \in \N\ |\ n \ge N\ \ x_n \le y_n$, то $x_0 \le y_0$
+		
+		\item (О промежуточной последовательности) Если $\liml_{n \to \infty} x_n = \liml_{n \to \infty} z_n = l$ и $\exists N \in \N\ |\ \forall n > N\ \ x_n \le y_n \le z_n$, то $\liml_{n \to \infty} y_n = l$
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	\begin{enumerate}
+		\item По условию, $\exists l \in \R\ |\ \forall \eps > 0\ \exists N \in \N\ |\ \forall n > N\ |x_n - l| < \eps$.
+		
+		Положим $\eps := 1 > 0$. Тогда $\forall n > N\ l - 1 < x_n < l + 1$. Отсюда следует, что
+		\begin{align*}
+		x_n \le \max(x_1, x_2, \dots, x_N, l + 1) \Ra \{x_n\}_{n = 1}^\infty - \text{ ограничена сверху}
+		\\
+		x_n \ge \min(x_1, x_2, \dots, x_N, l - 1) \Ra \{x_n\}_{n = 1}^\infty - \text{ ограничена снизу}
+		\end{align*}
+		
+		\item По условию, $\forall \eps > 0\ \exists N \in \N\ |\ \forall n > N\ |x_n - l| < \eps \lra l - \eps < x_n < l + \eps$.
+		
+		Тогда, рассмотрим $\eps := \frac{|l|}{2} > 0$.
+		\begin{align*}
+		l > 0 \Ra x_n > l - \eps = \frac{l}{2} > 0
+		\\
+		l < 0 \Ra x_n < l + \eps = \frac{l}{2} < 0
+		\end{align*}
+		
+		\item От противного. Пусть $x_0 > y_0$. Тогда, по условию:
+		\begin{align*}
+		\liml_{n \to \infty} x_n = x_0 \lra \forall \eps > 0\ \exists N_1 \in \N\ |\ \forall n > N_1\ x_0 - \eps < x_n < x_0 + \eps
+		\\
+		\liml_{n \to \infty} y_n = y_0 \lra \forall \eps > 0\ \exists N_2 \in \N\ |\ \forall n > N_2\ y_0 - \eps < y_n < y_0 + \eps
+		\end{align*}
+		Рассмотрим $\eps := \frac{x_0 - y_0}{2} > 0$, $\forall n > \max(N_1, N_2)$:
+		\[
+			y_n < y_0 + \eps = \frac{x_0 + y_0}{2} = x_0 - \eps < x_n
+		\]
+		Получили противоречие.
+		
+		\item По условию,
+		\[
+		\System{
+			\liml_{n \to \infty} x_n = l \lra \forall \eps > 0\ \exists N_1 \in \N\ |\ \forall n > N_1\ |x_n - l| < \eps
+			\\
+			\liml_{n \to \infty} z_n = l \lra \forall \eps > 0\ \exists N_2 \in \N\ |\ \forall n > N_2\ |z_n - l| < \eps
+		}
+		\]
+		Отсюда следует: $l - \eps < x_n \le y_n \le z_n < l + \eps \Ra |y_n - l| < \eps$, то есть $\liml_{n \to \infty} y_n = l$
+	\end{enumerate}
+\end{proof}
+
+\subsubsection{Арифметические операции со сходящимися последовательностями}
+
+Пусть $\liml_{n \to \infty} x_n = x_0$, $\liml_{n \to \infty} y_n = y_0$. Тогда
+
+\begin{enumerate}
+	\item $\liml_{n \to \infty} (x_n + y_n) = x_0 + y_0$
+	\item $\liml_{n \to \infty} (x_n - y_n) = x_0 - y_0$
+	\item $\liml_{n \to \infty} (x_n \cdot y_n) = x_0 \cdot y_0$
+	\item Если $\forall n \in \N\ y_n \neq 0$ и $y_0 \neq 0$, то $\liml_{n \to \infty} \frac{x_n}{y_n} = \frac{x_0}{y_0}$
+\end{enumerate}
+
+\begin{proof}
+\begin{enumerate}
+    \item[1-2.] 
+    По определению
+    \begin{align*}
+        \forall \eps > 0\ \exists N_1 \in \N\ |\ \forall n > N_1\ |x_n - x_0| < \frac{\eps}{2}
+        \\
+        \forall \eps > 0\ \exists N_2 \in \N\ |\ \forall n > N_2\ |y_n - y_0| < \frac{\eps}{2}
+    \end{align*}
+    Рассмотрим $\forall n > \max(N_1, N_2)$, тогда
+    $$
+        |(x_n \pm y_n) - (x_0 \pm y_0)| \le |x_n - x_0| + |y_n - y_0| < \frac{\eps}{2} + \frac{\eps}{2} = \eps
+    $$
+    \item[3.] 
+    $\forall \eps > 0\ \exists N_1 \in \N\ |\ \forall n > N_1\ |x_n - x_0| < \frac{\eps}{2}$
+    
+    Из теоремы выше, $\exists C > 0\ |\ \forall n \in \N\ |x_n| \le C$
+    
+    $\liml_{n \to \infty} y_n = y_0 \lra \forall \eps > 0\ \exists N_2 \in \N\ |\ \forall n > N_2\ |y_n - y_0| < \frac{\eps}{2C}$
+    
+    Рассмотрим $\forall n > \max(N_1, N_2)$:
+    $$
+        |x_n y_n - x_0 y_0| \le |x_n y_n - x_n y_0| + |x_n y_0 - x_0 y_0| = |x_n| \cdot |y_n - y_0| + |y_0| \cdot |x_n - x_0| < C \cdot \frac{\eps}{2C} + \frac{\eps}{2} = \eps
+    $$
+    \item[4.]
+    По условию,
+    \begin{align*}
+    	&\forall \eps > 0\ \exists N_1 \in \N\ |\ \forall n > N_1\ |x_n - x_0| < \frac{|y_0|}{2} \cdot \frac{\eps}{2}
+    	\\
+    	&\forall \eps > 0\ \exists N_2 \in \N\ |\ \forall n > N_2\ |y_n - y_0| < \frac{|y_0|^2}{2(|x_0| + 1)} \cdot \frac{\eps}{2}
+    \end{align*}
+    Так как $\liml_{n \to \infty} y_n = y_0 \neq 0$, то начиная с некоторого номера $|y_n| > \frac{|y_0|}{2}$. Будем считать, что это верно $\forall n > N_2$ (иначе можно \textit{подвинуть} наше значение $N_2$ вправо настолько, что это станет верно).
+   	
+    Рассмотрим $\forall n > \max(N_1, N_2)$
+    \begin{multline*}
+        \left|\frac{x_n}{y_n} - \frac{x_0}{y_0}\right| = \left|\frac{x_n y_0 - y_n x_0}{y_n y_0}\right| \le \frac{|x_n y_0 - x_0 y_0|}{|y_n| \cdot |y_0|} + \frac{|x_0 y_0 - y_n x_0|}{|y_n| \cdot |y_0|} =
+        \\
+        = \frac{|x_n - x_0|}{|y_n|} + \frac{|x_0| \cdot |y_0 - y_n|}{|y_n| \cdot |y_0|} < |x_n - x_0|\cdot \frac{2}{|y_0|} + |y_0 - y_n| \cdot \frac{2|x_0|}{|y_0|^2} <
+        \\
+        < \frac{\eps}{2} + \frac{\eps}{2} \cdot \frac{|x_0|}{|x_0| + 1} < \eps
+    \end{multline*}
+\end{enumerate}
+\end{proof}
+
+\subsubsection{Теорема Вейерштрасса о пределе монотонной ограниченной последовательности}
+\begin{theorem} (Вейерштрасса о монотонных последовательностях)
+	Если $\{x_n\}_{n = 1}^\infty$ ограниченная сверху и неубывающая последовательность, то $\exists \liml_{n \ra \infty} x_n = \sup \{x_n\}$. Если же невозрастающая и ограниченная снизу, то $\liml_{n \ra \infty} x_n = \inf \{x_n\}$
+\end{theorem}
+
+\begin{proof}
+	Приведём доказательство только для ограниченной сверху и неубывающей последовательности.
+	\[
+		l := \sup \{x_n\} \lra \System{
+		&\forall n \in \N\ x_n \le l
+		\\
+		&\forall \eps > 0\ \exists N \in \N\ l - \eps < x_N \le l
+		}
+	\]
+	Рассмотрим $\forall n > N$. Тогда
+	\[
+		l + \eps > l \ge x_n \ge x_{n - 1} \ge \dots \ge x_N > l - \eps \Ra |x_n - l| < \eps
+	\]
+	То есть
+	\[
+		\forall \eps > 0\ \exists N \in \N \such \forall n > N |x_n - l| < \eps
+	\]
+	Что и доказывает наше утверждение.
+\end{proof}
+
+\subsubsection{Число e}
+\begin{theorem} (Число Эйлера)
+	Последовательность $\{x_n = \left(1 + \frac{1}{n}\right)^n\}_{n = 1}^\infty$ сходится. Её предел называется числом $e$.
+	$$
+		e \approx 2,718281828459045\dots
+	$$
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим последовательность $y_n := \left(1 + \frac{1}{n}\right)^{n + 1}$. Докажем, что $y_n$ убывает.
+	\begin{multline*}
+		\frac{y_{n - 1}}{y_n} = \frac{(1 + \frac{1}{n - 1})^n}{(1 + \frac{1}{n})^{n + 1}} = \left(\frac{\frac{n}{n - 1}}{\frac{n + 1}{n}}\right)^{n+1} \cdot \frac{1}{1 + \frac{1}{n - 1}} = \left(\frac{n^2}{n^2 - 1}\right)^{n+1} \cdot \frac{1}{1 + \frac{1}{n - 1}} = \\
+		\left(1 + \frac{1}{n^2 - 1}\right)^{n+1} \cdot \frac{1}{1 + \frac{1}{n - 1}} \ge \left(1 + \frac{n + 1}{n^2 - 1}\right) \cdot \frac{1}{1 + \frac{1}{n - 1}} = \\
+		\left(1 + \frac{1}{n - 1}\right) \cdot \frac{1}{1 + \frac{1}{n - 1}} = 1, n > 1
+	\end{multline*}
+	При этом $\{y_n\}$ - ограниченная снизу последовательность, так как $\forall n \in \N\ y_n \ge 0$
+	
+	Следовательно, по теореме Вейерштрасса $\{y_n\}$ сходится. Её предел равен $e$.
+	
+	Покажем, что к тому же пределу сходится и $x_n$:
+	$$
+		\liml_{n \to \infty} x_n = \liml_{n \to \infty} y_n \cdot \left(1 + \frac{1}{n}\right) = e \cdot (1 + 0) = e
+	$$
+\end{proof}
+\subsubsection{Теорема Кантора о вложенных отрезках}
+\begin{definition}
+	Последовательность вложенных отрезков - это $\{[a_n; b_n]\}_{n = 1}^\infty$, $a_n \le b_n\ \forall n \in \N$ такая, что $\forall n \in \N\ [a_n; b_n] \supset [a_{n + 1}; b_{n + 1}]$
+\end{definition}
+
+\begin{theorem} (Принцип Кантора вложенных отрезков)
+	Каждая система вложенных отрезков имеет непустое пересечение, то есть
+	\[
+		\bigcap\limits_{n = 1}^\infty [a_n; b_n] \neq \emptyset
+	\]
+\end{theorem}
+
+\begin{proof}
+	$[a_n; b_n] \supset [a_{n + 1}; b_{n + 1}] \Ra \left((a_n \le a_{n + 1}) \wedge (b_n \ge b_{n + 1})\right)$
+	
+	Следовательно, $\{a_n\}$ - неубывающая, а $\{b_n\}$ - невозрастающая
+	
+	$a_n \le b_n \le b_1$, а $a_1 \le a_n \le b_n$, то есть
+	\begin{align*}
+		&\exists a = \liml_{n \ra \infty} a_n = \sup \{a_n\}
+		\\
+		&\exists b = \liml_{n \ra \infty} b_n = \inf \{b_n\}
+	\end{align*}
+	Так как $\forall n \in \N a_n \le b_n$, то предельный переход даёт неравенство $a \le b$
+	
+	Ну а учитывая равенства у пределов, получим $a_n \le a \le b \le b_n$, то есть $\forall n \in \N\ [a_n; b_n] \supset [a; b]$, что и доказывает непустоту пересечения.
+\end{proof}
+
+\begin{definition}
+	Стягивающейся системой отрезков называется система вложенных отрезков, длины которых образуют б.м. последовательность.
+\end{definition}
+
+\begin{addition}
+	Система стягивающихся отрезков имеет пересечение, состоящее из одной точки.
+\end{addition}
+\begin{proof}
+	$a_n \le a \le b \le b_n \Ra 0 \le b - a \le b_n - a_n \Ra a = b$
+\end{proof}
+
+\subsubsection{Бесконечно малые и бесконечно большие последовательности и их свойства}
+\begin{definition}
+	Последовательность $\{x_n\}_{n = 1}^\infty$ называется \textit{бесконечно малой}, если 
+	$$
+		\liml_{n \ra \infty} x_n = 0
+	$$
+\end{definition}
+
+\begin{theorem}(Предел произведения б.м. и ограниченной последовательностей)    
+    Если $\{x_n\}_{n = 1}^\infty$ - бесконечно малая, а $\{y_n\}_{n = 1}^\infty$ ограничена, то $\{x_ny_n\}_{n = 1}^\infty$ - бесконечно малая последовательность.
+\end{theorem}
+
+\begin{proof}
+	$\{y_n\}_{n = 1}^\infty$ - ограниченная $\Ra \exists M > 0\ |\ \forall n \in \N\ |y_n| \le M$
+	
+	$\{x_n\}_{n = 1}^\infty$ - бесконечно малая $\Ra \forall \eps > 0\ \exists N \in \N\ |\ \forall n > N\ |x_n| < \frac{\eps}{M}$
+\end{proof}
+
+
+\begin{definition}
+	Последовательностью $\{x_n\}_{n = 1}^\infty$ называется бесконечно большой, если
+	$$
+		\liml_{n \ra \infty} x_n = -\infty, +\infty \text{ или } \infty
+	$$
+\end{definition}
+
+\begin{theorem} (Связь б.м. и б.б. последовательностей)
+	Если $x_n \neq 0\ \forall n \in \N$, то $\{x_n\}_{n = 1}^\infty$ - б.м. $\lra \{\frac{1}{x_n}\}_{n = 1}^\infty$ - б.б.
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+	\item $\{x_n\}_{n = 1}^\infty$ - б.м. $\Ra \forall \eps > 0\ \exists N \in \N\ |\ \forall n > N\ |x_n| < \eps$. Отсюда следует, что $\left|\frac{\dse 1}{\dse x_n}\right| > \frac{\dse 1}{\dse \eps} \lra \frac{\dse 1}{\dse x_n} \in U_{\eps}(\infty) \lra \liml_{n \ra \infty} \frac{\dse 1}{\dse x_n} = \infty$
+	
+	\item $\liml_{n \ra \infty} \frac{1}{x_n} = \infty \lra \forall \eps > 0\ \exists N \in \N\ |\ n > N\ \left|\frac{\dse 1}{\dse x_n}\right| > \frac{\dse 1}{\dse \eps} \Ra 0 < |x_n| < \eps \lra \liml_{n \to \infty} x_n = 0$
+\end{enumerate}
+\end{proof}
+
